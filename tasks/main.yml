@@ -1,0 +1,7 @@
+---
+# tasks file for roles/django-webapp
+
+- include: packages.yml tags=django-webapp-packages
+- include: profile.yml tags=profile
+- include: virtualenv.yml tags=virtualenv
+- include: django.yml tags=django

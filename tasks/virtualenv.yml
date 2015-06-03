@@ -1,0 +1,35 @@
+---
+- name: make sure latest python-virtualenv / virtualenvwrapper is installed
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - python-virtualenv
+    - virtualenvwrapper
+
+- name: check if virtualenv already exists
+  sudo: yes
+  stat: path={{ virtualenv_dir }}
+  register: venv_dir
+
+- name: create virtualenv for Django web app
+  sudo: yes
+  shell: virtualenv -p python3 {{ virtualenv_dir }}
+  when: venv_dir.stat.isdir is not defined
+
+- name: install web application dependencies
+  sudo: yes
+  pip: requirements={{ webapp_dir }}/requirements.txt
+       virtualenv={{ virtualenv_dir }}
+       extra_args="--download-cache {{ webapp_dir }}/requirements/cache"
+
+- name: install web application dependencies dev_requirements
+  sudo: yes
+  pip: requirements={{ webapp_dir }}/requirements/local.txt
+       virtualenv={{ virtualenv_dir }}
+       extra_args="--download-cache {{ webapp_dir }}/requirements/cache"
+  when: dev_requirements
+
+- name: chown virtualenvs to webapp user
+  sudo: yes
+  sudo_user: root
+  file: path={{ virtualenv_dir }} owner={{ user }} recurse=yes

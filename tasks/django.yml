@@ -1,0 +1,51 @@
+---
+
+- name: chown webapp files to deploy user
+  sudo: yes
+  file: path={{ webapp_dir }} owner={{ user }} recurse=yes
+
+- name: django makemigrations for registration app
+  sudo_user: "{{ user }}"
+  sudo: yes
+  django_manage: >
+                 command="makemigrations registration"
+                 app_path={{ django_dir }}
+                 virtualenv={{ virtualenv_dir }}
+                 settings={{ django_settings }}
+  environment:
+    SECRET_KEY: "{{ SECRET_KEY }}"
+
+- name: django syncdb
+  sudo_user: "{{ user }}"
+  sudo: yes
+  django_manage: >
+                 command=syncdb
+                 app_path={{ django_dir }}
+                 virtualenv={{ virtualenv_dir }}
+                 settings={{ django_settings }}
+  ignore_errors: yes
+  environment:
+    SECRET_KEY: "{{ SECRET_KEY }}"
+
+- name: django migrate
+  sudo_user: "{{ user }}"
+  sudo: yes
+  django_manage: >
+                 command=migrate
+                 app_path={{ django_dir }}
+                 virtualenv={{ virtualenv_dir }}
+                 settings={{ django_settings }}
+  ignore_errors: yes
+  environment:
+    SECRET_KEY: "{{ SECRET_KEY }}"
+
+- name: django collectstatic
+  sudo_user: "{{ user }}"
+  sudo: yes
+  django_manage: >
+                 command=collectstatic
+                 app_path={{ django_dir }}
+                 virtualenv={{ virtualenv_dir }}
+                 settings={{ django_settings }}
+  environment:
+    SECRET_KEY: "{{ SECRET_KEY }}"

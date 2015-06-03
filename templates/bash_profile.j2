@@ -1,0 +1,7 @@
+# {{ ansible_managed }}
+export SECRET_KEY={{ SECRET_KEY }}
+export DJANGO_SETTINGS_MODULE={{ django_settings }}
+
+alias ls='ls --color'
+source {{ virtualenv_dir }}/bin/activate
+cd {{ webapp_dir }}

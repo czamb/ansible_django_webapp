@@ -1,0 +1,6 @@
+---
+- name: make sure latest libpq-dev is installed (needed for pg_config)
+  sudo: yes
+  apt: pkg={{ item }} state=latest
+  with_items:
+    - libpq-dev

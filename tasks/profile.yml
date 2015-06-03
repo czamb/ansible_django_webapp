@@ -1,0 +1,6 @@
+---
+- name: write bash profile
+  sudo_user: "{{ user }}"
+  sudo: yes
+  template: src=bash_profile.j2
+            dest="{{ user_dir }}/.bash_profile"
