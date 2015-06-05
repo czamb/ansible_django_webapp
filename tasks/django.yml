@@ -4,17 +4,6 @@
   sudo: yes
   file: path={{ webapp_dir }} owner={{ user }} recurse=yes
 
-- name: django makemigrations for registration app
-  sudo_user: "{{ user }}"
-  sudo: yes
-  django_manage: >
-                 command="makemigrations registration"
-                 app_path={{ django_dir }}
-                 virtualenv={{ virtualenv_dir }}
-                 settings={{ django_settings }}
-  environment:
-    SECRET_KEY: "{{ SECRET_KEY }}"
-
 - name: django syncdb
   sudo_user: "{{ user }}"
   sudo: yes
