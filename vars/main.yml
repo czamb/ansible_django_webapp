@@ -1,5 +1,5 @@
 ---
 # vars file for roles/django-webapp
 
-virtualenv_dir: /home/konektom/.virtualenvs/{{ project_name }}
+virtualenv_dir: /home/{{ project_name }}/.virtualenvs/{{ project_name }}
 source_app_dir: "{{ app_dir }}/{{ project_name }}"
