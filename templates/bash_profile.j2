@@ -5,6 +5,8 @@ export DJANGO_AWS_ACCESS_KEY_ID="{{ DJANGO_AWS_ACCESS_KEY_ID }}"
 export DJANGO_AWS_SECRET_ACCESS_KEY="{{ DJANGO_AWS_SECRET_ACCESS_KEY }}"
 export DJANGO_AWS_STORAGE_BUCKET_NAME="{{ DJANGO_AWS_STORAGE_BUCKET_NAME }}"
 export DATABASE_URL="postgres://localhost/{{ database_name }}"
+export SENDGRID_USERNAME="{{ sendgrid_username }}"
+export SENDGRID_PASSWORD="{{ sendgrid_password }}"
 
 alias ls='ls --color'
 source {{ virtualenv_dir }}/bin/activate
