@@ -16,6 +16,11 @@
   shell: virtualenv -p python3 {{ virtualenv_dir }}
   when: venv_dir.stat.isdir is not defined
 
+- name: chown virtualenvs to webapp user
+  sudo: yes
+  sudo_user: root
+  file: path={{ virtualenv_dir }} owner={{ user }} recurse=yes
+
 - name: install web application dependencies
   sudo: yes
   pip: requirements={{ webapp_dir }}/requirements.txt

@@ -4,17 +4,6 @@
   sudo: yes
   file: path={{ webapp_dir }} owner={{ user }} recurse=yes
 
-- name: django makemigrations for registration app
-  sudo_user: "{{ user }}"
-  sudo: yes
-  django_manage: >
-                 command="makemigrations registration"
-                 app_path={{ django_dir }}
-                 virtualenv={{ virtualenv_dir }}
-                 settings={{ django_settings }}
-  environment:
-    SECRET_KEY: "{{ SECRET_KEY }}"
-
 - name: django syncdb
   sudo_user: "{{ user }}"
   sudo: yes
@@ -26,6 +15,14 @@
   ignore_errors: yes
   environment:
     SECRET_KEY: "{{ SECRET_KEY }}"
+    DJANGO_SECRET_KEY: "{{ SECRET_KEY }}"
+    DJANGO_SETTINGS_MODULE: "{{ django_settings }}"
+    DJANGO_AWS_ACCESS_KEY_ID: "{{ DJANGO_AWS_ACCESS_KEY_ID }}"
+    DJANGO_AWS_SECRET_ACCESS_KEY: "{{ DJANGO_AWS_SECRET_ACCESS_KEY }}"
+    DJANGO_AWS_STORAGE_BUCKET_NAME: "{{ DJANGO_AWS_STORAGE_BUCKET_NAME }}"
+    DATABASE_URL: "postgres://localhost/{{ database_name }}"
+    SENDGRID_USERNAME: "{{ SENDGRID_USERNAME }}"
+    SENDGRID_PASSWORD: "{{ SENDGRID_PASSWORD }}"
 
 - name: django migrate
   sudo_user: "{{ user }}"
@@ -38,6 +35,14 @@
   ignore_errors: yes
   environment:
     SECRET_KEY: "{{ SECRET_KEY }}"
+    DJANGO_SECRET_KEY: "{{ SECRET_KEY }}"
+    DJANGO_SETTINGS_MODULE: "{{ django_settings }}"
+    DJANGO_AWS_ACCESS_KEY_ID: "{{ DJANGO_AWS_ACCESS_KEY_ID }}"
+    DJANGO_AWS_SECRET_ACCESS_KEY: "{{ DJANGO_AWS_SECRET_ACCESS_KEY }}"
+    DJANGO_AWS_STORAGE_BUCKET_NAME: "{{ DJANGO_AWS_STORAGE_BUCKET_NAME }}"
+    DATABASE_URL: "postgres://localhost/{{ database_name }}"
+    SENDGRID_USERNAME: "{{ SENDGRID_USERNAME }}"
+    SENDGRID_PASSWORD: "{{ SENDGRID_PASSWORD }}"
 
 - name: django collectstatic
   sudo_user: "{{ user }}"
@@ -49,3 +54,11 @@
                  settings={{ django_settings }}
   environment:
     SECRET_KEY: "{{ SECRET_KEY }}"
+    DJANGO_SECRET_KEY: "{{ SECRET_KEY }}"
+    DJANGO_SETTINGS_MODULE: "{{ django_settings }}"
+    DJANGO_AWS_ACCESS_KEY_ID: "{{ DJANGO_AWS_ACCESS_KEY_ID }}"
+    DJANGO_AWS_SECRET_ACCESS_KEY: "{{ DJANGO_AWS_SECRET_ACCESS_KEY }}"
+    DJANGO_AWS_STORAGE_BUCKET_NAME: "{{ DJANGO_AWS_STORAGE_BUCKET_NAME }}"
+    DATABASE_URL: "postgres://localhost/{{ database_name }}"
+    SENDGRID_USERNAME: "{{ SENDGRID_USERNAME }}"
+    SENDGRID_PASSWORD: "{{ SENDGRID_PASSWORD }}"
