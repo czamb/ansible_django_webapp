@@ -23,6 +23,7 @@
     DATABASE_URL: "postgres://localhost/{{ database_name }}"
     SENDGRID_USERNAME: "{{ SENDGRID_USERNAME }}"
     SENDGRID_PASSWORD: "{{ SENDGRID_PASSWORD }}"
+    DJANGO_LOGFILE_PATH: "{{ DJANGO_LOGFILE_PATH }}"
 
 - name: django migrate
   sudo_user: "{{ user }}"
@@ -43,6 +44,7 @@
     DATABASE_URL: "postgres://localhost/{{ database_name }}"
     SENDGRID_USERNAME: "{{ SENDGRID_USERNAME }}"
     SENDGRID_PASSWORD: "{{ SENDGRID_PASSWORD }}"
+    DJANGO_LOGFILE_PATH: "{{ DJANGO_LOGFILE_PATH }}"
 
 - name: django collectstatic
   sudo_user: "{{ user }}"
@@ -62,3 +64,4 @@
     DATABASE_URL: "postgres://localhost/{{ database_name }}"
     SENDGRID_USERNAME: "{{ SENDGRID_USERNAME }}"
     SENDGRID_PASSWORD: "{{ SENDGRID_PASSWORD }}"
+    DJANGO_LOGFILE_PATH: "{{ DJANGO_LOGFILE_PATH }}"
