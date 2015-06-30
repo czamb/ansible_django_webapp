@@ -7,6 +7,7 @@ export DJANGO_AWS_STORAGE_BUCKET_NAME="{{ DJANGO_AWS_STORAGE_BUCKET_NAME }}"
 export DATABASE_URL="postgres://localhost/{{ database_name }}"
 export SENDGRID_USERNAME="{{ SENDGRID_USERNAME }}"
 export SENDGRID_PASSWORD="{{ SENDGRID_PASSWORD }}"
+export DJANGO_LOGFILE_PATH="{{ DJANGO_LOGFILE_PATH }}"
 
 alias ls='ls --color'
 source {{ virtualenv_dir }}/bin/activate
