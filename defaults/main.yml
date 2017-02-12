@@ -1,4 +1,4 @@
----·
+---
 django_env:
   SECRET_KEY: "{{ SECRET_KEY }}"
   DJANGO_SECRET_KEY: "{{ SECRET_KEY }}"
