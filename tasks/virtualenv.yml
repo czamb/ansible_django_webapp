@@ -21,17 +21,22 @@
   sudo_user: root
   file: path={{ virtualenv_dir }} owner={{ user }} recurse=yes
 
+- name: update pip because of https://github.com/pypa/pip/issues/1968
+  become: yes
+  pip:
+    name: pip
+    virtualenv: "{{ virtualenv_dir }}"
+    version: 9.0
+
 - name: install web application dependencies
-  sudo: yes
+  become: yes
   pip: requirements={{ webapp_dir }}/requirements.txt
        virtualenv={{ virtualenv_dir }}
-       extra_args="--download-cache {{ webapp_dir }}/requirements/cache"
 
 - name: install web application dependencies dev_requirements
   sudo: yes
   pip: requirements={{ webapp_dir }}/requirements/local.txt
        virtualenv={{ virtualenv_dir }}
-       extra_args="--download-cache {{ webapp_dir }}/requirements/cache"
   when: dev_requirements
 
 - name: chown virtualenvs to webapp user
